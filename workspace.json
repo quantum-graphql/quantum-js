@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "projects": {
+    "quantum": {
+      "root": "packages/quantum",
+      "sourceRoot": "packages/quantum/src",
+      "projectType": "application",
+      "prefix": "quantum",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/packages/quantum",
+            "main": "packages/quantum/src/main.ts",
+            "tsConfig": "packages/quantum/tsconfig.app.json",
+            "assets": [
+              "packages/quantum/src/assets"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "packages/quantum/src/environments/environment.ts",
+                  "with": "packages/quantum/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "quantum:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "packages/quantum/tsconfig.app.json",
+              "packages/quantum/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!packages/quantum/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "packages/quantum/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/node"
+  },
+  "defaultProject": "quantum"
+}
