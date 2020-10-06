@@ -3,33 +3,65 @@ import diff from "./app/vdom/diff";
 import mount from "./app/vdom/mount";
 import render from "./app/vdom/render";
 
-import { div, span } from './app/vdom/elements';
+import qElements from './app/vdom/elements';
+const {
+    div,
+    span,
+    a,
+    button,
+} = qElements;
 
-const createVApp = (timer: { hours: number; minutes: number; seconds: number; }) => div({
-    attrs: {
-        id: 'app',
-    },
-    children: [
-        span({
-            children: [
-                String(timer.hours),
-                'h '
-            ],
-        }),
-        span({
-            children: [
-                String(timer.minutes),
-                'm '
-            ],
-        }),
-        span({
-            children: [
-                String(timer.seconds),
-                's'
-            ],
-        }),
-    ]
-});
+const createVApp = (timer: { hours: number; minutes: number; seconds: number; }) =>
+    div(
+        ':id=test',
+        'Timer : ',
+        span(
+            String(timer.hours),
+            'h '
+        ),
+        span(
+            String(timer.minutes),
+            'm '
+        ),
+        span(
+            String(timer.seconds),
+            's'
+        ),
+        div(),
+        a(
+            span(
+                ':style=color: blue;',
+                'G'
+            ),
+            span(
+                ':style=color: red;',
+                'O'
+            ),
+            span(
+                ':style=color: yellow;',
+                'O'
+            ),
+            span(
+                ':style=color: blue;',
+                'G'
+            ),
+            span(
+                ':style=color: green;',
+                'L'
+            ),
+            span(
+                ':style=color: E;',
+                'E'
+            ),
+            ':href=https://google.fr',
+            ':target=_blank'
+        ),
+        button(
+            ':class=btn btn--primary btn--large',
+            // ':style',
+            'Mon petit bouton'
+        ),
+    );
 
 const timer = () => {
     const now = new Date();
